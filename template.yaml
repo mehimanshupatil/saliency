@@ -1,0 +1,26 @@
+# This is the SAM template that represents the architecture of your serverless application
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html
+
+# The AWSTemplateFormatVersion identifies the capabilities of the template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/format-version-structure.html
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >-
+  aws-sam-saliency-service
+
+Resources:
+  AttensionFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: saliency
+      CodeUri: .
+      Handler: src/handlers/saliency.handler
+      Runtime: nodejs14.x
+      Timeout: 120
+      MemorySize: 1024
+      Events:
+        MyFunction:
+          Type: Api
+          Properties:
+            Path: /
+            Method: post
